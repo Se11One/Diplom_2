@@ -1,4 +1,4 @@
-package user;
+package order;
 
 import data.Order;
 import data.User;
@@ -6,10 +6,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import order.OrderClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import user.UserClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +86,7 @@ public class CreateOrderTest {
         userClient.login(user);
         bearerToken = responseRegister.extract().path("accessToken");
 
-        List wrongIngridient = new ArrayList();
+        List<String> wrongIngridient = new ArrayList<>();
         wrongIngridient.add("60d3b41abdacab0026a733c6");
 
         order.setIngredients(wrongIngridient);

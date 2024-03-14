@@ -1,4 +1,4 @@
-package user;
+package order;
 
 import data.Order;
 import data.User;
@@ -6,10 +6,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
-import order.OrderClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import user.UserClient;
 
 import static order.OrderGenerator.getListOrder;
 import static org.apache.http.HttpStatus.SC_OK;
@@ -44,7 +44,7 @@ public class GetOrderTest {
         userClient.login(user);
         orderClient.create(order, bearerToken);
 
-        ValidatableResponse responseOrderUser = orderClient.getClientOrder(bearerToken);
+        ValidatableResponse responseOrderUser = OrderClient.getClientOrder(bearerToken);
 
         responseOrderUser.assertThat().statusCode(SC_OK).body("success", is(true));
     }
@@ -55,7 +55,7 @@ public class GetOrderTest {
     @Description("Проверка получения списка заказов неавторизованного пользователя")
     public void createOrderWithoutAuthorizationTest() {
         bearerToken = "";
-        ValidatableResponse getClientOrder = orderClient.getClientOrder(bearerToken);
+        ValidatableResponse getClientOrder = OrderClient.getClientOrder(bearerToken);
 
         getClientOrder.assertThat().statusCode(SC_UNAUTHORIZED).body("success", is(false)).and()
                 .body("message", is("You should be authorised"));

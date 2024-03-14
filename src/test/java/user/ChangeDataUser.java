@@ -45,7 +45,6 @@ public class ChangeDataUser {
     @DisplayName("Изменение данных пользователя без авторизации")
     @Description("Проверка изменения данных существующего пользователя без авторизации - токен не устанавливаем")
     public void changeDataUserWithoutAuthorization() {
-        ValidatableResponse responseRegister = userClient.register(user);
 
         User secondUser = getRandomUser();
 
